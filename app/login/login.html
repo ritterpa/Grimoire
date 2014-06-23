@@ -1,0 +1,10 @@
+<div class="container" ng-if="auth.isLoggedIn === false">
+    <button type="submit" class="btn btn-success" ng-click="auth.loginGoogle()">Google Sign in</button>
+
+</div>
+
+<div class="container" ng-if="auth.isLoggedIn === true">
+
+    <pre>{{ auth.currentUser | json }}</pre>
+    <button type="submit" class="btn btn-success" ng-click="auth.logout()">Sign out</button>
+</div>
