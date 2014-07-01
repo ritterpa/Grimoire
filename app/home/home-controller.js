@@ -2,12 +2,11 @@
 
 app.controller('HomeCtrl', function ($scope, firebaseRef, Games) {
 
-  $scope.games =  Games.list;
+    $scope.games = Games.list;
 
-  $scope.createGame = function() {
+    $scope.createGame = function () {
         Games.create();
-        console.log("create game");
-  };
+    };
 
 
 });

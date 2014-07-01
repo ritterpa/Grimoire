@@ -9,15 +9,17 @@
     </div>
 </div>
 
-<div class="container">
+
     <!-- Example row of columns -->
     <div class="row">
         <div class="col-md-4" sg-access>
             <h2>Current Games</h2>
             <on>
                 <p>
-                    <ul ng-repeat="game in games">
-                        <li> {{ game | json  }}</li>
+                    <ul ng-repeat="(id, game) in games">
+                        <li>
+                            <a ui-sref="games.item({Id: id })">{{ game.title }}</a>
+                        </li>
                     </ul>
                 </p>
             </on>
@@ -52,4 +54,3 @@
     <footer>
         <p>&copy; Company 2014</p>
     </footer>
-</div>

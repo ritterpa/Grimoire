@@ -1,0 +1,11 @@
+<h2>Games</h2>
+
+<button ng-click="add()">Add New Game</button>
+<ul ng-repeat="(id, game) in games">
+    <li>
+        <a ui-sref="games.item({Id: id })">{{ game.title }}</a>
+    </li>
+</UL>
+
+
+

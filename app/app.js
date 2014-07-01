@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', [ 'ngAnimate', 'ui.router', 'ui.bootstrap', 'restangular', 'textAngular', 'firebase' ]);
+var app = angular.module('app', [ 'ngAnimate', 'ui.router', 'ui.bootstrap', 'restangular', 'textAngular', 'firebase', 'angularMoment']);
 
 app.constant('firebaseUrl', 'https://grimoire.firebaseio.com/' );
 
@@ -17,21 +17,61 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, Resta
             templateUrl: 'login/login.html',
             controller: 'LoginCtrl'
         })
-        .state('game', {
-            url: '/game/:gameId',
-            templateUrl: 'game/game.html',
-            controller: 'GameCtrl',
+
+        .state('advantages', {
+            url: '/advantages',
+            template: '<div ui-view></div>',
+            abstract: true
+        })
+        .state('advantages.item', {
+
+            url: '/:Id',
+            templateUrl: 'advantages/item/advantages.item.html',
+            controller: 'AdvantagesItemCtrl',
             resolve: {
-                gameId: function ($stateParams) {
-                    return $stateParams.gameId;
+                Id: function ($stateParams) {
+                    return $stateParams.Id;
+                },
+                Advantage: function($firebase, firebaseUrl, $stateParams )
+                {
+                    return  $firebase(new Firebase(firebaseUrl + 'advantages/' + $stateParams.Id) );
+                }
+            }
+        })
+        .state('advantages.list', {
+            url: '',
+            templateUrl: 'advantages/list/advantages.list.html',
+            controller: 'AdvantagesListCtrl'
+        })
+        .state('games', {
+            url: '/games',
+            template: '<div ui-view></div>',
+            abstract: true
+
+        })
+        .state('games.list', {
+            url: '',
+            templateUrl: 'game/list/game.list.html',
+            controller: 'GameListCtrl'
+        })
+        .state('games.item', {
+            url: '/:Id',
+            templateUrl: 'game/item/game.item.html',
+            controller: 'GameItemCtrl',
+            resolve: {
+                Id: function ($stateParams) {
+                    return $stateParams.Id;
+                },
+                Game: function($firebase, firebaseUrl, $stateParams )
+                {
+                    return $firebase(new Firebase(firebaseUrl + 'games/' + $stateParams.Id) );
                 }
             }
         })
         .state('home', {
             url: '/',
             templateUrl: '/home/home.html',
-            controller: 'HomeCtrl',
-            autherization: false
+            controller: 'HomeCtrl'
         });
 
 });
@@ -40,7 +80,7 @@ app.service('firebaseRef', function(firebaseUrl, $firebase) {
     return new Firebase(firebaseUrl);
 });
 
-app.run(function ($rootScope) {
+app.run(function ($rootScope, AuthService) {
     $rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
 
         if (toState.autherization === true && Auth.isLogged === false) {
@@ -49,6 +89,8 @@ app.run(function ($rootScope) {
             $state.go('login' );
         }
     });
+
+    AuthService.loginGoogle(function(){});
 });
 
 app.filter('unsafe', function($sce) {

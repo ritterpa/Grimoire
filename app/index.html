@@ -20,7 +20,9 @@
 
 <div ng-include="'components/nav/nav.html'"></div>
 
-<div ui-view></div>
+<div class="container">
+    <div ui-view></div>
+</div>
 
 <!-- build:js scripts/vendor.js -->
 <!-- bower:js -->
@@ -42,6 +44,8 @@
 <script src="../bower_components/firebase-simple-login/firebase-simple-login.js"></script>
 <script src="../bower_components/angularfire/angularfire.js"></script>
 <script src="../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../bower_components/moment/moment.js"></script>
+<script src="../bower_components/angular-moment/angular-moment.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -55,9 +59,13 @@
 
 <!-- yeoman:js -->
 <script src="login/login-controller.js"></script>
-<script src="game/game-controller.js"></script>
 <script src="components/games/games-service.js"></script>
 <script src="components/sgaccess/sgaccess-directive.js"></script>
+<script src="components/advantages/advantages-service.js"></script>
+<script src="advantages/item/advantages.item-controller.js"></script>
+<script src="advantages/list/advantages.list-controller.js"></script>
+<script src="game/list/game.list-controller.js"></script>
+<script src="game/item/game.item-controller.js"></script>
 <!-- endYeoman -->
 
 </body>

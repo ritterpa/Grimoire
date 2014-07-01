@@ -32,7 +32,7 @@ app.service('AuthService', function ($firebaseSimpleLogin, firebaseRef, Restangu
             auth.$login('google').then(function(user) {
                 service.isLoggedIn = true;
                 service.currentUser = user;
-                service.createProfile(user.id, user.email, user.thirdPartyUserData.name, null);
+                service.createProfile(user.uid, user.email, user.thirdPartyUserData.name, null);
                 Restangular.setDefaultHeaders({"Authorization": user.firebaseAuthToken});
 
                 if( callback ) {

@@ -1,0 +1,10 @@
+<h2>Advantages</h2>
+
+<button ng-click="add()">Add New Advantage</button>
+<a ui-sref="home">Home</a>
+<ul ng-repeat="(id, adv) in advantages">
+    <li>
+        <a ui-sref="advantages.item({Id: id})">{{ adv.name }}</a>
+        <pre> {{ adv | json}} </pre>
+    </li>
+</ul>
