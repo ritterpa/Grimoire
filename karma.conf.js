@@ -31,6 +31,8 @@ module.exports = function(config) {
         'bower_components/firebase-simple-login/firebase-simple-login.js',
         'bower_components/angularfire/angularfire.js',
         'bower_components/angular-animate/angular-animate.js',
+        'bower_components/moment/moment.js',
+        'bower_components/angular-moment/angular-moment.js',
         // endbower
 
         //add agnular-mocks for testing

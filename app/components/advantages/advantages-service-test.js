@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: Advantages', function () {
+describe('Service: AdvantagesService', function () {
 
     // load the service's module
     beforeEach(module('app'));
 
     // instantiate service
     var Advantages;
-    beforeEach(inject(function (_Advantages_) {
-        Advantages = _Advantages_;
+    beforeEach(inject(function (_AdvantagesService_) {
+        Advantages = _AdvantagesService_;
     }));
 
     it('should do something', function () {
-        expect(!!Advantages).toBe(true);
+        expect(!!AdvantagesService).toBe(true);
     });
 
 });

@@ -23,25 +23,54 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, Resta
             template: '<div ui-view></div>',
             abstract: true
         })
-        .state('advantages.item', {
-
-            url: '/:Id',
-            templateUrl: 'advantages/item/advantages.item.html',
-            controller: 'AdvantagesItemCtrl',
+        .state('advantages.list', {
+            url: '',
+            templateUrl: 'advantages/list/list.html',
+            controller: 'AdvantagesListCtrl',
             resolve: {
-                Id: function ($stateParams) {
-                    return $stateParams.Id;
+                Advantages: function($firebase, firebaseUrl, $stateParams )
+                {
+                    return  $firebase(new Firebase(firebaseUrl + 'advantages') );
+                }
+            }
+
+        })
+        .state('advantages.item', {
+            url: '/{id:[^/]*}',
+            template: '<div ui-view></div>',
+            abstract: true
+        })
+        .state('advantages.item.view', {
+
+            url: '',
+            templateUrl: 'advantages/item/view/view.html',
+            controller: 'AdvantagesItemViewCtrl',
+            resolve: {
+                id: function($stateParams )
+                {
+                    return  $stateParams.id;
                 },
                 Advantage: function($firebase, firebaseUrl, $stateParams )
                 {
-                    return  $firebase(new Firebase(firebaseUrl + 'advantages/' + $stateParams.Id) );
+                    return  $firebase(new Firebase(firebaseUrl + 'advantages/' + $stateParams.id) );
                 }
             }
         })
-        .state('advantages.list', {
-            url: '',
-            templateUrl: 'advantages/list/advantages.list.html',
-            controller: 'AdvantagesListCtrl'
+        .state('advantages.item.edit', {
+
+            url: '/edit',
+            templateUrl: 'advantages/item/edit/edit.html',
+            controller: 'AdvantagesItemEditCtrl',
+            resolve: {
+                id: function($stateParams )
+                {
+                    return  $stateParams.id;
+                },
+                Advantage: function($firebase, firebaseUrl, $stateParams )
+                {
+                    return  $firebase(new Firebase(firebaseUrl + 'advantages/' + $stateParams.id) );
+                }
+            }
         })
         .state('games', {
             url: '/games',

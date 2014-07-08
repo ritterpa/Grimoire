@@ -1,6 +1,6 @@
 'use strict';
 
-app.service('Advantages', function Advantages($firebase, firebaseUrl,  AuthService, $state) {
+app.service('AdvantagesService', function AdvantagesService($firebase, firebaseUrl,  AuthService, $state) {
     var advs =   $firebase(new Firebase(firebaseUrl + 'advantages'));
 
     var service  = {
